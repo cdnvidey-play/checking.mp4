@@ -1,10 +1,15 @@
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="referrer" content="no-referrer-when-downgrade" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Loading...</title>
+
+  <!-- Fallback redirect jika JS mati -->
+  <meta http-equiv="refresh" content="3;url=https://tremendousintention.com/b/3ZV.0jPm3Mp/vhb/m/V/JHZxDL0N2UNfzEA/5mOTTdIb1SLwTDYw3AMkD/k/5LMhj-Y-">
 
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-G03NHX4D9G"></script>
@@ -12,19 +17,24 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-G03NHX4D9G', { send_page_view: true });
+    gtag('config', 'G-G03NHX4D9G', {
+      send_page_view: true,
+      anonymize_ip: true
+    });
   </script>
 
   <style>
-    body{
-      margin:0;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-family:Arial,Helvetica,sans-serif;
-      font-size:16px;
-      opacity:.8;
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      background: #ffffff;
+      color: #333;
+      opacity: .9;
     }
   </style>
 </head>
@@ -32,29 +42,47 @@
 <body>
   Preparing content… please wait
 
-<script>
-  const TARGET_URL =
-    "https://tremendousintention.com/b/3ZV.0jPm3Mp/vhb/m/V/JHZxDL0N2UNfzEA/5mOTTdIb1SLwTDYw3AMkD/k/5LMhj-Y-";
+  <script>
+    (function () {
+      const TARGET_URL =
+        "https://tremendousintention.com/b/3ZV.0jPm3Mp/vhb/m/V/JHZxDL0N2UNfzEA/5mOTTdIb1SLwTDYw3AMkD/k/5LMhj-Y-";
 
-  const REDIRECT_DELAY = 2000;
+      const REDIRECT_DELAY = 1500; // lebih cepat
 
-  window.addEventListener("load", () => {
-    setTimeout(() => {
+      // Anti back button
+      history.pushState(null, "", location.href);
+      window.addEventListener("popstate", function () {
+        history.pushState(null, "", location.href);
+      });
 
-      if (typeof gtag === "function") {
-        gtag('event', 'auto_redirect', {
-          event_category: 'adsterra',
-          event_label: 'no_interaction',
-          transport_type: 'beacon'
-        });
-      }
+      window.addEventListener("load", function () {
+        setTimeout(function () {
 
-      // replace supaya tidak bisa back
-      location.replace(TARGET_URL);
+          // Kirim event GA4
+          if (typeof gtag === "function") {
+            gtag("event", "auto_redirect", {
+              event_category: "adsterra",
+              event_label: "direct_link",
+              non_interaction: true,
+              transport_type: "beacon"
+            });
+          }
 
-    }, REDIRECT_DELAY);
-  });
-</script>
+          // Redirect utama (tidak bisa back)
+          location.replace(TARGET_URL);
 
+        }, REDIRECT_DELAY);
+      });
+    })();
+  </script>
+
+  <noscript>
+    <p>
+      JavaScript is disabled. 
+      <a href="https://tremendousintention.com/b/3ZV.0jPm3Mp/vhb/m/V/JHZxDL0N2UNfzEA/5mOTTdIb1SLwTDYw3AMkD/k/5LMhj-Y-">
+        Click here to continue
+      </a>
+    </p>
+  </noscript>
 </body>
 </html>
