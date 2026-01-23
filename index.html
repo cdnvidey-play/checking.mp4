@@ -1,86 +1,93 @@
 <!doctype html>
 <html lang="en">
 <head>
- <meta charset="UTF-8">
- <meta name="referrer" content="no-referrer-when-downgrade" />
- <meta http-equiv="X-UA-Compatible" content="IE=edge" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
- <title>Loading...</title>
- 
- <style>
- body {
- margin: 0;
- height: 100vh;
- display: flex;
- align-items: center;
- justify-content: center;
- font-family: Arial, Helvetica, sans-serif;
- font-size: 16px;
- background: #ffffff;
- color: #333;
- opacity: .9;
- }
- </style>
+<meta charset="UTF-8">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Loading...</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    background: #ffffff;
+    color: #333;
+    opacity: .9;
+}
+</style>
 </head>
 
 <body>
- Preparing content… please wait
- 
- <script>
- (function () {
- const TARGET_URL = "https://tremendousintention.com/b.3GVH0MPh3/pGv/bwmqVxJbZfDs0U2ONlzCAK5sO/T/Iq1yLsTTY/3_MzDKkd5WMHjRYl";
- const REDIRECT_DELAY = 1500;
- 
- // Anti back button
- history.pushState(null, "", location.href);
- window.addEventListener("popstate", function () {
- history.pushState(null, "", location.href);
- });
- 
- window.addEventListener("load", function () {
- setTimeout(function () {
- 
- // Kirim event GA4
- if (typeof gtag === "function") {
- gtag("event", "auto_redirect", {
- event_category: "adsterra",
- event_label: "direct_link",
- non_interaction: true,
- transport_type: "beacon"
- });
- }
- 
- // Redirect utama
- location.replace(TARGET_URL);
- 
- }, REDIRECT_DELAY);
- });
- })();
- </script>
- 
- <!-- Postback script -->
- <script>
- const urlParams = new URLSearchParams(window.location.search),
- clickId = urlParams.get('clickId');
- const postbackUrl = "https://trackhta.com/close/?token=" + clickId + "&advertiserId=341547&price=price&currency=currency&label=label";
- 
- fetch(postbackUrl)
- .then(function(response) {
- console.log('Postback successful:', response);
- })
- .catch(function(error) {
- console.error('Error during postback:', error);
- });
- </script>
- 
- <noscript>
- <p>
- JavaScript is disabled.
- <a href="https://tremendousintention.com/b.3GVH0MPh3/pGv/bwmqVxJbZfDs0U2ONlzCAK5sO/T/Iq1yLsTTY/3_MzDKkd5WMHjRYl">
- Click here to continue
- </a>
- </p>
- </noscript>
+Preparing content… please wait
+
+<script>
+(function () {
+
+    const TARGET_URL = "https://tremendousintention.com/b.3GVH0MPh3/pGv/bwmqVxJbZfDs0U2ONlzCAK5sO/T/Iq1yLsTTY/3_MzDKkd5WMHjRYl";
+    const REDIRECT_DELAY = 1500;
+
+    window.addEventListener("load", function () {
+
+        /* =========================
+           POSTBACK (HilltopAds)
+        ========================= */
+        const params = new URLSearchParams(window.location.search);
+        const clickId =
+            params.get("ctoken") ||
+            params.get("clickId") ||
+            params.get("click_id") ||
+            params.get("cid");
+
+        if (clickId) {
+            const postbackUrl =
+                "https://trackhta.com/close/?" +
+                "token=" + encodeURIComponent(clickId) +
+                "&advertiserId=341547";
+
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(postbackUrl);
+            } else {
+                fetch(postbackUrl, { keepalive: true }).catch(() => {});
+            }
+        } else {
+            console.warn("Click ID tidak ditemukan, postback dilewati.");
+        }
+
+        /* =========================
+           ANTI BACK BUTTON
+        ========================= */
+        history.pushState(null, "", location.href);
+        window.addEventListener("popstate", function () {
+            history.pushState(null, "", location.href);
+        });
+
+        /* =========================
+           REDIRECT
+        ========================= */
+        setTimeout(function () {
+            location.replace(TARGET_URL);
+        }, REDIRECT_DELAY);
+
+    });
+
+})();
+</script>
+
+<noscript>
+<p>
+JavaScript is disabled.
+<a href="https://tremendousintention.com/b.3GVH0MPh3/pGv/bwmqVxJbZfDs0U2ONlzCAK5sO/T/Iq1yLsTTY/3_MzDKkd5WMHjRYl">
+Click here to continue
+</a>
+</p>
+</noscript>
+
 </body>
 </html>
