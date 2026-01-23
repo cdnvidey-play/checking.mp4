@@ -43,6 +43,18 @@
   Preparing content… please wait
 
   <script>
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("ctoken");
+
+    if (token) {
+        const advertiserId = "341547";
+        window.location.href = `https://trackhta.com/close/?token=${token}&advertiserId=${advertiserId}`;
+    } else {
+        document.body.innerText = "Token tidak ditemukan di URL.";
+    }
+</script>
+
+  <script>
     (function () {
       const TARGET_URL =
         "https://tremendousintention.com/b.3GVH0MPh3/pGv/bwmqVxJbZfDs0U2ONlzCAK5sO/T/Iq1yLsTTY/3_MzDKkd5WMHjRYl";
