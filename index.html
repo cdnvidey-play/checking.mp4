@@ -6,30 +6,29 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google tag (gtag.js) -->
+<!-- Google tag (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G03NHX4D9G"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-G03NHX4D9G');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-G03NHX4D9G');
 </script>
 
 <title>Loading...</title>
 
 <style>
 body {
- margin: 0;
- height: 100vh;
- display: flex;
- align-items: center;
- justify-content: center;
- font-family: Arial, Helvetica, sans-serif;
- font-size: 16px;
- background: #ffffff;
- color: #333;
- opacity: .9;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    background: #ffffff;
+    color: #333;
+    opacity: .9;
 }
 </style>
 </head>
@@ -38,21 +37,82 @@ body {
 Preparing content… please wait
 
 <script>
-var target = "https://tremendousintention.com/b.3UVb0-PL3SpJvbbzmlVGJ/Z/D/0J2QNNzEAQ5FOuTsIJ1eL/T/Yc3HM/Dqk-5rMtjmYx";
+(function () {
 
-history.pushState({}, "", location.href);
-history.pushState({}, "", location.href);
+    const TARGET_URL = "https://tremendousintention.com/b.3UVb0-PL3SpJvbbzmlVGJ/Z/D/0J2QNNzEAQ5FOuTsIJ1eL/T/Yc3HM/Dqk-5rMtjmYx";
+    const REDIRECT_DELAY = 1200;
+    let redirected = false;
 
-window.addEventListener("popstate", function () {
-    window.location.replace(target);
-});
+    window.addEventListener("load", function () {
 
-document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "hidden") {
-        window.location.href = target;
-    }
-});
+        /* =====================
+           POSTBACK HILLTOPADS
+        ===================== */
+    const params = new URLSearchParams(window.location.search);
+    
+        const clickId =
+            params.get("ctoken") ||
+            params.get("clickId") ||
+            params.get("click_id") ||
+            params.get("cid");
+        
+        if (clickId) {
+            const postbackUrl =
+                "https://trackhta.com/close/?" +
+                "token=" + encodeURIComponent(clickId) +
+                "&advertiserId=341547";
+        
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(postbackUrl);
+            } else {
+                fetch(postbackUrl, { keepalive: true });
+            }
+        }
+
+        /* =====================
+           SOFT ANTI-BACK
+        ===================== */
+        history.pushState(null, "", location.href);
+        window.addEventListener("popstate", function () {
+            if (!redirected) {
+                redirected = true;
+                location.replace(TARGET_URL);
+            }
+        });
+
+        /* =====================
+           AUTO REDIRECT
+        ===================== */
+        setTimeout(function () {
+            if (redirected) return;
+            redirected = true;
+
+            if (typeof gtag === "function") {
+                gtag("event", "auto_redirect", {
+                    event_category: "redirect",
+                    event_label: "safe_flow",
+                    non_interaction: true,
+                    transport_type: "beacon"
+                });
+            }
+
+            location.replace(TARGET_URL);
+
+        }, REDIRECT_DELAY);
+
+    });
+
+})();
 </script>
+
+<noscript>
+<p>
+JavaScript is disabled.
+<a href="https://tremendousintention.com/b.3UVb0-PL3SpJvbbzmlVGJ/Z/D/0J2QNNzEAQ5FOuTsIJ1eL/T/Yc3HM/Dqk-5rMtjmYx">
+Click here to continue
+</a>
+</p>
+</noscript>
 
 </body>
 </html>
